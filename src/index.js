@@ -22,9 +22,10 @@ const getPlaylist = async (userInput) => {
 		loading.style.display = "none";
 
 		let link = document.createElement("a");
-		link.href = response;
+		link.href = response.data.link;
 		link.innerHTML = "-" + "Playlist created";
 		resultDiv.appendChild(link);
+		resultDiv.style.display = "block";
 	} catch (error) {
 		loading.style.display = "none";
 		resultDiv.style.display = "none";
