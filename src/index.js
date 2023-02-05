@@ -21,24 +21,43 @@ const getPlaylist = async (userInput) => {
 	errors.textContent = "";
 	try {
 		const response = await axios.get(`${api}${userInput}`);
-		loading.style.display = "none";
-
-		let link = document.createElement("a");
-		link.href = response.data.link;
-		link.innerHTML = "-" + "Playlist created";
-		link.target = "_blank";
-		resultDiv.appendChild(link);
-		resultDiv.style.display = "block";
+		// Validates if response is a playlist link or fail message.
+		if (response.data.link !== "Request failed. Try again!") {
+			displayPlaylist(response.data.link);
+		} else {
+			displayError();
+		}
 	} catch (error) {
-		loading.style.display = "none";
-		resultDiv.style.display = "none";
-		errors.textContent  = "There´s been an error. Try again!";
+		displayError();
 	}
-}
+};
+// Display playlist link to user.
+function displayPlaylist (playlist) {
+	let link = document.createElement("a");
+	link.href = playlist;
+	link.innerHTML = "-" + "Playlist created";
+	link.target = "_blank";
+	resultDiv.appendChild(link);
+	loading.style.display = "none";
+	resultDiv.style.display = "block";
+};
+// Display error message to user.
+function displayError () {
+	loading.style.display = "none";
+	resultDiv.style.display = "none";
+	errors.textContent  = "There has been an error. Try again!";	
+};
+
+// Delete created HTML elements.
+function cleanDisplay() {
+    let outputDiv = document.querySelector(".result");
+    outputDiv.textContent = '';
+};
 
 const handleSubmit = async (event) => {
 	event.preventDefault();
+	cleanDisplay();
 	getPlaylist(userInput.value);
-}
+};
 
 form.addEventListener("submit", event => handleSubmit(event));
