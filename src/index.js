@@ -1,5 +1,7 @@
 import axios from "axios";
-const api = "http://100.25.26.253:3000/";
+//const api = "http://100.25.26.253:3000/";
+// DNS de IPv4 pública changes?
+const api = "http://ec2-100-25-180-165.compute-1.amazonaws.com:3000/"
 
 const errors = document.querySelector(".errors");
 const loading = document.querySelector(".loading");
@@ -24,6 +26,7 @@ const getPlaylist = async (userInput) => {
 		let link = document.createElement("a");
 		link.href = response.data.link;
 		link.innerHTML = "-" + "Playlist created";
+		link.target = "_blank";
 		resultDiv.appendChild(link);
 		resultDiv.style.display = "block";
 	} catch (error) {
