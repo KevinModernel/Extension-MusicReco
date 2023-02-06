@@ -1,12 +1,10 @@
 import axios from "axios";
-//const api = "http://100.25.26.253:3000/";
-// DNS de IPv4 pública changes?
-const api = "http://ec2-100-25-180-165.compute-1.amazonaws.com:3000/"
+const api = "http://ec2-184-73-226-111.compute-1.amazonaws.com:3000/"
 
 const errors = document.querySelector(".errors");
 const loading = document.querySelector(".loading");
 let resultDiv = document.querySelector(".result");
-resultDiv.style.display = "none";
+//resultDiv.style.display = "none";
 loading.style.display = "none";
 errors.textContent = "";
 
